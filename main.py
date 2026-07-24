@@ -4,6 +4,16 @@
 
 
 
+class Order:
+    side: int # 0 - ask, 1 - bid
+    order_id: int
+    price: int
+    qty: int
+    timestamp: int # for price time priority
+    prev_id: int
+    next_id: int
+    
+   
 
 
 class OrderBook:
