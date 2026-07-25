@@ -27,7 +27,7 @@ class OrderBook:
 
         self.order_map = {} # map of order ids to their position node
     
-    def get_index(self, price: float):
+    def get_index(self, price: float) -> int:
         return (price - self.min_price) // self.tick_size 
 
 
