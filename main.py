@@ -18,8 +18,18 @@ class Order:
 
 class OrderBook:
 
-    def __init__(self):
-        pass
+    def __init__(self, max_price: int, min_price: int, tick_size: int = 1):
+        self.min_price = min_price
+        self.max_price = max_price
+        numlevels = (max_price - min_price) // tick_size + 1
+        self.tick_size = tick_size
+        self.levels = [None for _ in range(numlevels)] 
+
+        self.order_map = {} # map of order ids to their position node
+    
+    def get_index(self, price: float):
+        return (price - self.min_price) // self.tick_size 
+
 
 
 
