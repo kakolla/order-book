@@ -62,8 +62,35 @@ class OrderBook:
 
         self.order_map[order.order_id] = order
 
-    def cancel(self):
-        pass
+    def cancel(self, order: Order):
+        # find order at the level
+        n: Order | None = self.order_map.pop(order.order_id, None)
+        if n is None:
+            # not found 
+            return
+            
+        idx = self.get_index(n.price)
+        level = self.levels[idx]
+
+        assert level
+        if n.prev is not None:
+            n.prev.next = n.next
+        else:
+            level.head = n.next # n is head
+
+        if n.next is not None:
+            n.next.prev = n.prev
+        else:
+            level.tail = n.prev
+
+        if level.head is None:
+            # level is empty
+            #  dont deallocate
+            pass
+        
+
+
+
 
     def execute(self):
         pass
